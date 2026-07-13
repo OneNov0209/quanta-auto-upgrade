@@ -5,7 +5,7 @@ set -euo pipefail
 IMAGE="xd637/quanta-node:latest"
 CONTAINER="quanta-validator"
 DATA="/opt/quanta_data_v2"
-PASSWORD="your password"
+PASSWORD=""
 BOOTSTRAP="34.87.128.33:8333"
 
 rollback() {
@@ -33,12 +33,19 @@ echo "=================================================="
 echo "Quanta Auto Upgrade - $(date)"
 echo "=================================================="
 
+if [[ -z "$PASSWORD" ]]; then
+    echo "ERROR: Wallet password has not been configured."
+    echo "Please reinstall using install.sh"
+    exit 1
+fi
+
 if ! docker ps -a --format '{{.Names}}' | grep -qx "$CONTAINER"; then
     echo "ERROR: Container '$CONTAINER' not found."
     exit 1
 fi
 
 OLD_IMAGE=$(docker inspect "$CONTAINER" --format '{{.Image}}')
+
 OLD_DIGEST=$(docker image inspect "$IMAGE" \
 --format '{{index .RepoDigests 0}}' 2>/dev/null || true)
 
