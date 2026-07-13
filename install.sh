@@ -22,8 +22,16 @@ if [ ! -f quanta-auto-upgrade.sh ]; then
     exit 1
 fi
 
+echo
+read -rsp "Enter your validator wallet password: " PASSWORD
+echo
+echo
+
 echo "[1/5] Installing upgrade script..."
 cp quanta-auto-upgrade.sh /root/quanta-auto-upgrade.sh
+
+sed -i "s|^PASSWORD=.*|PASSWORD=\"$PASSWORD\"|" /root/quanta-auto-upgrade.sh
+
 chmod +x /root/quanta-auto-upgrade.sh
 
 echo "[2/5] Installing systemd service..."
@@ -43,13 +51,11 @@ echo "=========================================="
 echo "Installation completed successfully!"
 echo "=========================================="
 echo
-echo "Useful commands:"
-echo
-echo "Run upgrade now:"
-echo "  systemctl start quanta-auto-upgrade.service"
+echo "Run upgrade manually:"
+echo "systemctl start quanta-auto-upgrade.service"
 echo
 echo "View logs:"
-echo "  journalctl -u quanta-auto-upgrade.service -f"
+echo "journalctl -u quanta-auto-upgrade.service -f"
 echo
 echo "Check timer:"
-echo "  systemctl list-timers"
+echo "systemctl list-timers"
