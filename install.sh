@@ -7,19 +7,16 @@ echo "      Quanta Auto Upgrade Installer"
 echo "=========================================="
 echo
 
-# Pastikan dijalankan sebagai root
 if [ "$EUID" -ne 0 ]; then
     echo "Please run this installer as root."
     exit 1
 fi
 
-# Pastikan Docker sudah terpasang
 if ! command -v docker >/dev/null 2>&1; then
     echo "Docker is not installed."
     exit 1
 fi
 
-# Pastikan script tersedia
 if [ ! -f quanta-auto-upgrade.sh ]; then
     echo "quanta-auto-upgrade.sh not found."
     exit 1
