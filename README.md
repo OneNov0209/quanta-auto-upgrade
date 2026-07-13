@@ -20,10 +20,10 @@ Automatically upgrades your Quanta validator Docker container whenever a new ima
 ## Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/quanta-auto-upgrade.git
+git clone https://github.com/OneNov0209/quanta-auto-upgrade.git
 cd quanta-auto-upgrade
 chmod +x install.sh
-./install.sh
+sudo ./install.sh
 ```
 
 ## Logs
