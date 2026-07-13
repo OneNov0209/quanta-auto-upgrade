@@ -1,0 +1,13 @@
+[Unit]
+Description=Quanta Auto Upgrade
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/root/quanta-auto-upgrade.sh
+User=root
+
+[Install]
+WantedBy=multi-user.target
