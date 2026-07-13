@@ -5,11 +5,12 @@ Automatically upgrades your Quanta validator Docker container whenever a new ima
 ## Features
 
 - Automatically checks Docker Hub every 30 minutes
-- Downloads the latest image
+- Downloads the latest Docker image
 - Recreates the validator container
-- Performs health checks after upgrade
+- Performs a health check after upgrade
 - Automatically rolls back if the new version fails
 - Runs as a systemd timer
+- Simple one-command installation
 
 ## Requirements
 
@@ -19,29 +20,35 @@ Automatically upgrades your Quanta validator Docker container whenever a new ima
 
 ## Installation
 
-```bash
-git clone https://github.com/OneNov0209/quanta-auto-upgrade.git
-cd quanta-auto-upgrade
-chmod +x install.sh
-sudo ./install.sh
-```
-
-## Logs
+Run:
 
 ```bash
-journalctl -u quanta-auto-upgrade.service -f
+bash <(curl -fsSL https://raw.githubusercontent.com/OneNov0209/quanta-auto-upgrade/main/install.sh)
 ```
 
-## Manual Run
+The installer will:
+
+- Download all required files
+- Ask for your validator wallet password
+- Install the systemd service
+- Enable the auto-upgrade timer
+
+## Run Upgrade Now
 
 ```bash
 systemctl start quanta-auto-upgrade.service
 ```
 
-## Timer Status
+## View Logs
 
 ```bash
-systemctl list-timers
+journalctl -u quanta-auto-upgrade.service -f
+```
+
+## Check Timer
+
+```bash
+systemctl status quanta-auto-upgrade.timer
 ```
 
 ## Disable
@@ -49,3 +56,7 @@ systemctl list-timers
 ```bash
 systemctl disable --now quanta-auto-upgrade.timer
 ```
+
+## License
+
+MIT License
