@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Quanta Auto Upgrade every 30 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=30min
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target
